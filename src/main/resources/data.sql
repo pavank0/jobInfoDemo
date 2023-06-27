@@ -1,0 +1,1 @@
+INSERT INTO job (id, job_tital, job_desc, job_sal) VALUES (1, 'Sr. Java Developer','IC Roal','950K');
