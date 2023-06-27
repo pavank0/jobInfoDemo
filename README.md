@@ -7,8 +7,8 @@
 # Test Swagger UI
 ## http://localhost:8080/swagger-ui.html#/
 ## REST API:
-  The project will expose three REST end-points
-  GET /jobs
-  GET /jobs/{uuid}
-  POST /jobs 
+  ##The project will expose three REST end-points
+  ### GET /jobs
+  ### GET /jobs/{uuid}
+  ### POST /jobs 
 
