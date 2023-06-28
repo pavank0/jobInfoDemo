@@ -24,32 +24,42 @@ public class JobControlle {
     @PostMapping
     public ResponseEntity<String> postJobs(@RequestBody Job jsonString) {
 
-
-        Optional<Job> jobOpt = jobService.getJobById(Long.toString(jsonString.getJobId()));
-
-
-        if (jobOpt.isPresent()) {
-
-            return new ResponseEntity<>(HttpStatus.ALREADY_REPORTED);
-        } else
-            jobService.saveJobs(jsonString);
+        try{
+            Optional<Job> jobOpt = jobService.getJobById(Long.toString(jsonString.getJobId()));
 
 
-        return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
+            if (jobOpt.isPresent()) {
+
+                return new ResponseEntity<>(HttpStatus.ALREADY_REPORTED);
+            } else
+                jobService.saveJobs(jsonString);
+
+
+            return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
+        }catch(Exception ex){
+            return new ResponseEntity<>("Error", HttpStatus.ACCEPTED);
+        }
+
+
     }
 
     @GetMapping("/{uuid}")
     public ResponseEntity<Job> findByUUId(@PathVariable String uuid) {
 
-        Optional<Job> job = null;
+      try{
+          Optional<Job> job = null;
 
-        job = jobService.getJobById(uuid);
+          job = jobService.getJobById(uuid);
 
-        if (job.isPresent()) {
+          if (job.isPresent()) {
 
-            return new ResponseEntity<>(job.get(), HttpStatus.OK);
-        } else
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+              return new ResponseEntity<>(job.get(), HttpStatus.OK);
+          } else
+              return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+      }catch(Exception ex){
+          return new ResponseEntity<Job>(new Job(), HttpStatus.EXPECTATION_FAILED);
+      }
     }
 
 
